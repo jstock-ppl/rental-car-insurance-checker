@@ -1,134 +1,30 @@
-<!-- Rental Car Insurance Checker — Updated 09/04/2025 -->
-<div style="max-width:100%; font-family:Public Sans, sans-serif; line-height:1.5; color:#2F2F2F;">
-  
-  <!-- Header -->
-  <div style="background:#EEF1F8; padding:20px; border-radius:8px; text-align:center; margin-bottom:24px;">
-    <h2 style="margin:0 0 8px 0; color:#47609F;">🚗 Rental Car Insurance Checker</h2>
-    <p style="margin:0; color:#2F2F2F;">Clear guidance for business travel — includes PIP / UM / UIM / No-Fault flags.</p>
-  </div>
+<h4 style="color:#47609F;">3️⃣ State Minimum Liability & Extras</h4>
 
-  <!-- Last Updated Notice -->
-  <div style="background:#D0D7EB; border-left:4px solid #47609F; border-radius:8px; padding:16px; margin-bottom:24px;">
-    <strong>Last Updated: 09/04/2025</strong>
-    <div style="margin-top:6px; font-size:14px;">
-      ⚠️ Verify with your state's DMV or insurance department — rules can change.
-    </div>
-  </div>
-
-  <!-- State selector -->
-  <form id="rentalInsuranceForm" style="margin-bottom:24px;">
-    <label style="display:block; margin-bottom:8px; font-weight:600; font-size:16px;">Which state will you be renting a car in?</label>
-    <select id="travelState" required style="width:100%; padding:12px; border:2px solid #D0D7EB; border-radius:6px; font-size:16px; background:white;">
-      <option value="">Select your destination state...</option>
-      <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
-      <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
-      <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
-      <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
-      <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
-      <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
-      <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
-      <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
-      <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
-      <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
-      <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
-      <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
-      <option>Wisconsin</option><option>Wyoming</option>
-    </select>
-    <button type="submit" style="width:100%; background:#4FAD78; color:white; border:none; padding:15px; border-radius:6px; font-size:16px; font-weight:600; margin-top:12px; cursor:pointer;">Get My Plan</button>
-  </form>
-
-  <div id="rentalResults" style="display:none;"></div>
-
+<div style="background:#D0D7EB;padding:12px;border-radius:6px;margin-bottom:12px;">
+  <strong>✅ State Minimum Liability</strong>
+  <div style="margin-top:6px;">BI: ${info.biPerPerson}/${info.biPerAccident}, PD: ${info.pd}</div>
 </div>
 
-<script>
-(function() {
-  // Helper to format state limits or special notes
-  function formatLimits(info) {
-    if(info.type==="limits") {
-      return `<div>BI: ${info.biPerPerson}/${info.biPerAccident}, PD: ${info.pd}</div>`;
-    } else {
-      return `<div>${info.note}</div>`;
-    }
-  }
+${tierBlock(info.tier)}
 
-  const stateInfo = {
-    "California": {type:"limits", biPerPerson:"$30,000", biPerAccident:"$60,000", pd:"$15,000", pipRequired:false, noFaultState:false, umRequired:false, uimRequired:false, tier:"strong"},
-    "New York": {type:"limits", biPerPerson:"$25,000", biPerAccident:"$50,000", pd:"$10,000", pipRequired:true, noFaultState:true, umRequired:true, uimRequired:true, tier:"strong"},
-    "Florida": {type:"special", note:"No mandatory BI — $10,000 PIP and $10,000 PDL required.", pipRequired:true, noFaultState:true, umRequired:false, uimRequired:false, tier:"strong"},
-    "Texas": {type:"limits", biPerPerson:"$30,000", biPerAccident:"$60,000", pd:"$25,000", pipRequired:false, noFaultState:false, umRequired:false, uimRequired:false, tier:"consider"},
-    "New Jersey": {type:"limits", biPerPerson:"$25,000", biPerAccident:"$50,000", pd:"$25,000", pipRequired:true, noFaultState:true, umRequired:false, uimRequired:false, tier:"consider"}
-    // Add other states as needed
-  };
+<!-- Actionable guidance for PIP/UM/UIM/No-Fault -->
+<div style="background:#5978c7;color:white;padding:12px;border-radius:6px;margin-bottom:12px;">
+  <strong>State Guidance: what to do</strong>
+  <ul style="margin-top:6px; padding-left:20px;">
+    <li>PIP (Personal Injury Protection): ${info.pipRequired ? "Required — confirm with rental agent" : "Optional — if available, consider $10,000 coverage for medical expenses"}</li>
+    <li>No-Fault: ${info.noFaultState ? "Yes — state uses no-fault rules; your PIP may apply" : "No — state follows at-fault rules; your liability insurance applies if you cause an accident"}</li>
+    <li>UM (Uninsured Motorist): ${info.umRequired ? "Required — check your policy limits" : "Optional — consider $100,000/$300,000 to cover others without enough insurance"}</li>
+    <li>UIM (Underinsured Motorist): ${info.uimRequired ? "Required — check your policy limits" : "Optional — same limits as UM to protect against drivers with insufficient coverage"}</li>
+  </ul>
+</div>
 
-  document.getElementById('rentalInsuranceForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const state = document.getElementById('travelState').value;
-    if(!state){alert('Please select a destination state.'); return;}
-    generatePlan(state);
-  });
-
-  function tierBlock(tier) {
-    if(tier==="strong") {
-      return `<div style="background:#DE8761;color:white;padding:12px;border-radius:6px;margin-bottom:12px;">⚠️ Strongly recommended: consider SLI $100,000/$300,000/$100,000</div>`;
-    } else if(tier==="consider") {
-      return `<div style="background:#5978c7;color:white;padding:12px;border-radius:6px;margin-bottom:12px;">⚠️ Recommended: consider UM/UIM $100,000/$300,000</div>`;
-    } else {
-      return `<div style="background:#4FAD78;color:white;padding:12px;border-radius:6px;margin-bottom:12px;">✅ Adequate: state minimums suffice</div>`;
-    }
-  }
-
-  function generatePlan(state) {
-    const info = stateInfo[state] || {type:"limits", biPerPerson:"$25,000", biPerAccident:"$50,000", pd:"$25,000", pipRequired:false, noFaultState:false, umRequired:false, uimRequired:false, tier:"consider"};
-    const resultsDiv = document.getElementById('rentalResults');
-
-    let html = `<div style="background:#EEF1F8; padding:16px; border-radius:8px;">`;
-
-    // Section 1: Chase Card
-    html += `<h4 style="color:#47609F;">1️⃣ Your Chase Ink Business Card</h4>
-      <ul>
-        <li>✓ Pay with your card to activate primary CDW/LDW coverage (collision/theft)</li>
-        <li>✓ Decline rental company CDW/LDW</li>
-        <li>✓ Card covers business rentals only; not liability</li>
-      </ul>`;
-
-    // Section 2: Health Insurance
-    html += `<h4 style="color:#47609F;">2️⃣ Your Health Insurance</h4>
-      <ul>
-        <li>✓ Covers medical costs if anyone is injured in an accident</li>
-        <li>✓ Check your policy for PIP or No-Fault specifics</li>
-      </ul>`;
-
-    // Section 3: State Liability & Extras
-    html += `<h4 style="color:#47609F;">3️⃣ State Minimum Liability & Extras</h4>
-      <div style="background:#D0D7EB;padding:12px;border-radius:6px;margin-bottom:12px;">
-        <strong>✅ State Minimum Liability</strong>
-        <div style="margin-top:6px;">BI: ${info.biPerPerson}/${info.biPerAccident}, PD: ${info.pd}</div>
-      </div>`;
-
-    html += tierBlock(info.tier);
-
-    // UM/UIM flags simplified
-    html += `<div style="background:#5978c7;color:white;padding:12px;border-radius:6px;margin-bottom:12px;">
-      <strong>State Flags:</strong> PIP: ${info.pipRequired ? "Required" : "Optional"}, No-Fault: ${info.noFaultState ? "Yes" : "No"}, UM: ${info.umRequired ? "Required" : "Optional"}, UIM: ${info.uimRequired ? "Required" : "Optional"}
-    </div>`;
-
-    // At-the-counter steps
-    html += `<div style="background:#4FAD78;color:white;padding:12px;border-radius:6px;">
-      <strong>✅ At the Rental Counter</strong>
-      <ul>
-        <li>Pay with your Chase Ink Business card</li>
-        <li>Decline CDW/LDW</li>
-        <li>Confirm PIP if required</li>
-        <li>Take photos of the car</li>
-        <li>Keep all receipts and rental agreements</li>
-      </ul>
-    </div>`;
-
-    html += `</div>`;
-    resultsDiv.innerHTML = html;
-    resultsDiv.style.display = 'block';
-  }
-
-})();
-</script>
+<div style="background:#4FAD78;color:white;padding:12px;border-radius:6px;">
+  <strong>✅ At the Rental Counter</strong>
+  <ul>
+    <li>Pay with your Chase Ink Business card</li>
+    <li>Decline CDW/LDW</li>
+    <li>Confirm PIP if required</li>
+    <li>Take photos of the car</li>
+    <li>Keep all receipts and rental agreements</li>
+  </ul>
+</div>
