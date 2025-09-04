@@ -1,15 +1,47 @@
-<div style="max-width: 100%; font-family: system-ui, -apple-system, sans-serif; line-height: 1.5; color: #333;">
-    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 24px; text-align: center;">
-        <h2 style="margin: 0 0 8px 0; color: #2c3e50;">🚗 Rental Car Insurance Checker</h2>
-        <p style="margin: 0; color: #666;">Get clear instructions for your business travel</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Car Insurance Checker</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.5; color: #333; background: #f4f4f9; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+        .header { background: #e9f5ff; padding: 20px; border-radius: 8px; margin-bottom: 24px; text-align: center; }
+        .header h2 { margin: 0 0 8px 0; color: #0056b3; }
+        .header p { margin: 0; color: #555; }
+        form { margin-bottom: 24px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #2c3e50; font-size: 18px; }
+        select { width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 6px; font-size: 16px; background: white; }
+        button { width: 100%; background: #28a745; color: white; border: none; padding: 15px; border-radius: 6px; font-size: 18px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+        button:hover { background: #218838; }
+        #rentalResults { display: none; }
+        .result-section { background: #f8f9fa; border: 1px solid #e1e5e9; border-left: 4px solid; border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+        .step-1 { border-left-color: #28a745; background: #f8fff8; border-color: #d4edda; }
+        .step-2 { border-left-color: #0066cc; background: #e7f3ff; border-color: #b8daff; }
+        .step-3 { border-left-color: #28a745; background: #f8fff8; border-color: #d4edda; }
+        .highlight-blue { background: #e7f3ff; padding: 15px; border-radius: 6px; margin: 10px 0; border: 2px solid #0066cc; color: #004085; }
+        .highlight-yellow { background: #fff3cd; padding: 15px; border-radius: 6px; margin: 10px 0; border: 2px solid #ffc107; color: #856404; }
+        .highlight-red { background: #fff5f5; padding: 15px; border-radius: 6px; margin: 10px 0; border: 2px solid #dc3545; color: #721c24; }
+        .highlight-green { background: #d4edda; padding: 15px; border-radius: 6px; margin: 10px 0; border: 2px solid #c3e6cb; color: #155724; }
+        .list-item { background: #ffffff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #28a745; }
+        .list-item-red { border-left-color: #dc3545; color: #721c24; background: #fff5f5; }
+        .list-item-yellow { border-left-color: #ffc107; color: #856404; background: #fff3cd; }
+        .list-item-blue { border-left-color: #0066cc; color: #004085; background: #e7f3ff; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h2>🚗 Rental Car Insurance Checker</h2>
+        <p>Get clear instructions for your business travel</p>
     </div>
     
-    <form id="rentalInsuranceForm" style="margin-bottom: 24px;">
-        <div style="margin-bottom: 20px;">
-            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #2c3e50; font-size: 18px;">
-                Which state will you be renting a car in?
-            </label>
-            <select id="travelState" required style="width: 100%; padding: 12px; border: 2px solid #e1e5e9; border-radius: 6px; font-size: 16px; background: white;">
+    <form id="rentalInsuranceForm">
+        <div>
+            <label for="travelState">Which state will you be renting a car in?</label>
+            <select id="travelState" required>
                 <option value="">Select your destination state...</option>
                 <option value="Alabama">Alabama</option>
                 <option value="Alaska">Alaska</option>
@@ -30,199 +62,4 @@
                 <option value="Kentucky">Kentucky</option>
                 <option value="Louisiana">Louisiana</option>
                 <option value="Maine">Maine</option>
-                <option value="Maryland">Maryland</option>
-                <option value="Massachusetts">Massachusetts</option>
-                <option value="Michigan">Michigan</option>
-                <option value="Minnesota">Minnesota</option>
-                <option value="Mississippi">Mississippi</option>
-                <option value="Missouri">Missouri</option>
-                <option value="Montana">Montana</option>
-                <option value="Nebraska">Nebraska</option>
-                <option value="Nevada">Nevada</option>
-                <option value="New Hampshire">New Hampshire</option>
-                <option value="New Jersey">New Jersey</option>
-                <option value="New Mexico">New Mexico</option>
-                <option value="New York">New York</option>
-                <option value="North Carolina">North Carolina</option>
-                <option value="North Dakota">North Dakota</option>
-                <option value="Ohio">Ohio</option>
-                <option value="Oklahoma">Oklahoma</option>
-                <option value="Oregon">Oregon</option>
-                <option value="Pennsylvania">Pennsylvania</option>
-                <option value="Rhode Island">Rhode Island</option>
-                <option value="South Carolina">South Carolina</option>
-                <option value="South Dakota">South Dakota</option>
-                <option value="Tennessee">Tennessee</option>
-                <option value="Texas">Texas</option>
-                <option value="Utah">Utah</option>
-                <option value="Vermont">Vermont</option>
-                <option value="Virginia">Virginia</option>
-                <option value="Washington">Washington</option>
-                <option value="West Virginia">West Virginia</option>
-                <option value="Wisconsin">Wisconsin</option>
-                <option value="Wyoming">Wyoming</option>
-            </select>
-        </div>
-        
-        <button type="submit" style="width: 100%; background: #28a745; color: white; border: none; padding: 15px; border-radius: 6px; font-size: 18px; font-weight: 600; cursor: pointer;">
-            Get My Plan
-        </button>
-    </form>
-    
-    <div id="rentalResults" style="display: none;">
-        <!-- Results will be populated here -->
-    </div>
-</div>
-
-<script>
-(function() {
-    // State data with liability limits and recommendations
-    const stateInfo = {
-    "Alabama": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Alaska": { limits: "$50,000/$100,000/$25,000", recommendation: "Consider upgrading" },
-    "Arizona": { limits: "$25,000/$50,000/$15,000", recommendation: "Strongly recommended" },
-    "Arkansas": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "California": { limits: "$15,000/$30,000/$5,000", recommendation: "Strongly recommended" },
-    "Colorado": { limits: "$25,000/$50,000/$15,000", recommendation: "Strongly recommended" },
-    "Connecticut": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Delaware": { limits: "$25,000/$50,000/$10,000", recommendation: "Strongly recommended" },
-    "Florida": { limits: "$10,000/$20,000/$10,000", recommendation: "Strongly recommended" },
-    "Georgia": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Hawaii": { limits: "$20,000/$40,000/$10,000", recommendation: "Strongly recommended" },
-    "Idaho": { limits: "$25,000/$50,000/$15,000", recommendation: "Strongly recommended" },
-    "Illinois": { limits: "$25,000/$50,000/$20,000", recommendation: "Consider upgrading" },
-    "Indiana": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Iowa": { limits: "$20,000/$40,000/$15,000", recommendation: "Strongly recommended" },
-    "Kansas": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Kentucky": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Louisiana": { limits: "$15,000/$30,000/$25,000", recommendation: "Strongly recommended" },
-    "Maine": { limits: "$50,000/$100,000/$25,000", recommendation: "Consider upgrading" },
-    "Maryland": { limits: "$30,000/$60,000/$15,000", recommendation: "Strongly recommended" },
-    "Massachusetts": { limits: "$20,000/$40,000/$5,000", recommendation: "Strongly recommended" },
-    "Michigan": { limits: "$50,000/$100,000/$10,000", recommendation: "Consider upgrading" },
-    "Minnesota": { limits: "$30,000/$60,000/$10,000", recommendation: "Strongly recommended" },
-    "Mississippi": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Missouri": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Montana": { limits: "$25,000/$50,000/$20,000", recommendation: "Consider upgrading" },
-    "Nebraska": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Nevada": { limits: "$25,000/$50,000/$20,000", recommendation: "Consider upgrading" },
-    "New Hampshire": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "New Jersey": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "New Mexico": { limits: "$25,000/$50,000/$10,000", recommendation: "Strongly recommended" },
-    "New York": { limits: "$25,000/$50,000/$10,000", recommendation: "Strongly recommended" },
-    "North Carolina": { limits: "$30,000/$60,000/$25,000", recommendation: "Consider upgrading" },
-    "North Dakota": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Ohio": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Oklahoma": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Oregon": { limits: "$25,000/$50,000/$20,000", recommendation: "Consider upgrading" },
-    "Pennsylvania": { limits: "$15,000/$30,000/$5,000", recommendation: "Strongly recommended" },
-    "Rhode Island": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "South Carolina": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "South Dakota": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Tennessee": { limits: "$25,000/$50,000/$15,000", recommendation: "Strongly recommended" },
-    "Texas": { limits: "$30,000/$60,000/$25,000", recommendation: "Consider upgrading" },
-    "Utah": { limits: "$25,000/$65,000/$15,000", recommendation: "Strongly recommended" },
-    "Vermont": { limits: "$25,000/$50,000/$10,000", recommendation: "Strongly recommended" },
-    "Virginia": { limits: "$30,000/$60,000/$20,000", recommendation: "Consider upgrading" },
-    "Washington": { limits: "$25,000/$50,000/$10,000", recommendation: "Strongly recommended" },
-    "West Virginia": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-    "Wisconsin": { limits: "$25,000/$50,000/$10,000", recommendation: "Strongly recommended" },
-    "Wyoming": { limits: "$25,000/$50,000/$20,000", recommendation: "Consider upgrading" }
-};
-
-    document.getElementById('rentalInsuranceForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const state = document.getElementById('travelState').value;
-        
-        if (!state) {
-            alert('Please select a destination state.');
-            return;
-        }
-        
-        generatePlan(state);
-    });
-
-    function generatePlan(state) {
-        const info = stateInfo[state];
-        const resultsDiv = document.getElementById('rentalResults');
-        
-        let html = '<div style="background: #28a745; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px;">';
-        html += '<h3 style="margin: 0;">Your insurance plan for ' + state + '</h3>';
-        html += '</div>';
-
-        // Step 1: Chase Card Setup
-        html += '<div style="background: #f8fff8; border: 1px solid #d4edda; border-left: 4px solid #28a745; border-radius: 8px; padding: 20px; margin-bottom: 16px;">';
-        html += '<h4 style="margin: 0 0 8px 0; color: #155724;">STEP 1: Set Up Your Chase Card Protection</h4>';
-        html += '<p style="margin: 0 0 12px 0; color: #666; font-size: 14px;">This gives you up to $60,000 collision/theft coverage</p>';
-        html += '<div style="background: #ffffff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #28a745;">✓ Pay for the ENTIRE rental with your Chase Business Ink card</div>';
-        html += '<div style="background: #ffffff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #28a745;">✓ When asked about insurance, SAY NO to collision damage waiver (CDW/LDW)</div>';
-        html += '<div style="background: #ffffff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #28a745;">✓ Confirm the rental is for business purposes</div>';
-        html += '</div>';
-
-        // Step 2: Liability Coverage with specific limits
-        html += '<div style="background: #f8f9fa; border: 1px solid #e1e5e9; border-left: 4px solid #0066cc; border-radius: 8px; padding: 20px; margin-bottom: 16px;">';
-        html += '<h4 style="margin: 0 0 8px 0; color: #2c3e50;">STEP 2: Liability Coverage Analysis</h4>';
-        
-        if (state === "California") {
-            html += '<div style="background: #fff5f5; padding: 15px; border-radius: 6px; margin: 10px 0; border: 2px solid #dc3545;">';
-            html += '<div style="font-size: 16px; font-weight: bold; color: #721c24; margin-bottom: 8px;">🚨 CALIFORNIA SPECIAL CASE</div>';
-            html += '<div style="color: #721c24; margin-bottom: 6px;"><strong>Automatic Coverage: NONE</strong></div>';
-            html += '<div style="color: #721c24; margin-bottom: 6px;">California rental companies do NOT provide automatic liability coverage!</div>';
-            html += '<div style="color: #721c24; font-weight: bold;">REQUIRED: You MUST purchase liability insurance from rental company</div>';
-            html += '</div>';
-        } else {
-            html += '<div style="background: #e7f3ff; padding: 15px; border-radius: 6px; margin: 10px 0; border: 2px solid #0066cc;">';
-            html += '<div style="font-size: 16px; font-weight: bold; color: #004085; margin-bottom: 8px;">Automatic Coverage Included</div>';
-            html += '<div style="font-size: 18px; font-weight: bold; color: #004085; margin-bottom: 8px;">' + info.limits + '</div>';
-            html += '<div style="font-style: italic; color: #666; font-size: 14px;">(Bodily injury per person / Bodily injury per accident / Property damage per accident)</div>';
-            html += '</div>';
-
-            // Recommendation based on coverage adequacy
-            if (info.recommendation === "Strongly recommended") {
-                html += '<div style="background: #fff3cd; padding: 15px; border-radius: 6px; margin: 10px 0; border: 2px solid #ffc107;">';
-                html += '<div style="font-size: 16px; font-weight: bold; color: #856404; margin-bottom: 8px;">⚠️ STRONGLY RECOMMENDED: Upgrade Coverage</div>';
-                html += '<div style="color: #856404; margin-bottom: 6px;">State minimums are very low for consulting work</div>';
-                html += '<div style="font-weight: bold; color: #856404;">Suggested: $100,000/$300,000/$100,000</div>';
-                html += '</div>';
-            } else if (info.recommendation === "Consider upgrading") {
-                html += '<div style="background: #e7f3ff; padding: 15px; border-radius: 6px; margin: 10px 0; border: 1px solid #b8daff;">';
-                html += '<div style="font-size: 16px; font-weight: bold; color: #004085; margin-bottom: 8px;">💡 RECOMMENDED: Consider Higher Limits</div>';
-                html += '<div style="color: #004085; margin-bottom: 6px;">Current coverage is adequate but upgrading provides better protection</div>';
-                html += '<div style="font-weight: bold; color: #004085;">Suggested: $100,000/$300,000/$100,000</div>';
-                html += '</div>';
-            } else {
-                html += '<div style="background: #d4edda; padding: 15px; border-radius: 6px; margin: 10px 0; border: 1px solid #c3e6cb;">';
-                html += '<div style="font-size: 16px; font-weight: bold; color: #155724; margin-bottom: 8px;">✅ GOOD: Coverage is Adequate</div>';
-                html += '<div style="color: #155724; margin-bottom: 6px;">State minimums provide reasonable protection</div>';
-                html += '<div style="color: #155724;">Optional upgrade: $100,000/$300,000/$100,000 for extra peace of mind</div>';
-                html += '</div>';
-            }
-        }
-        html += '</div>';
-
-        // Step 3: Action Plan
-        html += '<div style="background: #f8fff8; border: 1px solid #d4edda; border-left: 4px solid #28a745; border-radius: 8px; padding: 20px; margin-bottom: 16px;">';
-        html += '<h4 style="margin: 0 0 8px 0; color: #155724;">STEP 3: At the Rental Counter</h4>';
-        html += '<div style="background: #ffffff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #28a745;">✓ Pay with your Chase Business Ink card</div>';
-        html += '<div style="background: #ffffff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #28a745;">✓ DECLINE collision damage waiver (CDW/LDW)</div>';
-        
-        if (state === "California") {
-            html += '<div style="background: #fff5f5; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #dc3545; color: #721c24;">✓ PURCHASE liability insurance (REQUIRED in California)</div>';
-        } else if (info.recommendation === "Strongly recommended") {
-            html += '<div style="background: #fff3cd; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #ffc107; color: #856404;">✓ STRONGLY CONSIDER purchasing upgraded liability insurance</div>';
-        } else if (info.recommendation === "Consider upgrading") {
-            html += '<div style="background: #e7f3ff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #0066cc; color: #004085;">✓ Consider purchasing upgraded liability insurance for better protection</div>';
-        } else {
-            html += '<div style="background: #ffffff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #28a745;">✓ Optional: Upgrade liability insurance if desired</div>';
-        }
-        
-        html += '<div style="background: #ffffff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #28a745;">✓ Take photos of the car before driving</div>';
-        html += '<div style="background: #ffffff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #28a745;">✓ Keep all receipts and rental agreements</div>';
-        html += '</div>';
-
-        resultsDiv.innerHTML = html;
-        resultsDiv.style.display = 'block';
-    }
-})();
-</script>
+                <option value="Maryland">Maryland</
