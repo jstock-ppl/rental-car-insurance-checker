@@ -76,17 +76,17 @@
 
 <script>
 (function() {
-    // State data with liability limits and recommendations
+    // State data with LIABILITY LIMITS and recommendations
     const stateInfo = {
         "Alabama": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
         "Alaska": { limits: "$50,000/$100,000/$25,000", recommendation: "Consider upgrading" },
         "Arizona": { limits: "$25,000/$50,000/$15,000", recommendation: "Strongly recommended" },
         "Arkansas": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-        "California": { limits: "NO AUTOMATIC COVERAGE", recommendation: "Required purchase" },
+        "California": { limits: "$15,000/$30,000/$5,000", recommendation: "Strongly recommended" },
         "Colorado": { limits: "$25,000/$50,000/$15,000", recommendation: "Strongly recommended" },
         "Connecticut": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
         "Delaware": { limits: "$25,000/$50,000/$10,000", recommendation: "Strongly recommended" },
-        "Florida": { limits: "No bodily injury/$10,000 property", recommendation: "Strongly recommended" },
+        "Florida": { limits: "$10,000/$20,000/$10,000", recommendation: "Strongly recommended" },
         "Georgia": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
         "Hawaii": { limits: "$20,000/$40,000/$10,000", recommendation: "Strongly recommended" },
         "Idaho": { limits: "$25,000/$50,000/$15,000", recommendation: "Strongly recommended" },
@@ -97,7 +97,7 @@
         "Kentucky": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
         "Louisiana": { limits: "$15,000/$30,000/$25,000", recommendation: "Strongly recommended" },
         "Maine": { limits: "$50,000/$100,000/$25,000", recommendation: "Consider upgrading" },
-        "Maryland": { limits: "$30,000/$60,000/$15,000", recommendation: "Strongly recommended" },
+        "Maryland": { limits: "$30,000/$60,000/$15,000", recommendation: "Consider upgrading" },
         "Massachusetts": { limits: "$20,000/$40,000/$5,000", recommendation: "Strongly recommended" },
         "Michigan": { limits: "$50,000/$100,000/$10,000", recommendation: "Consider upgrading" },
         "Minnesota": { limits: "$30,000/$60,000/$10,000", recommendation: "Strongly recommended" },
@@ -107,11 +107,11 @@
         "Nebraska": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
         "Nevada": { limits: "$25,000/$50,000/$20,000", recommendation: "Consider upgrading" },
         "New Hampshire": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-        "New Jersey": { limits: "$15,000/$30,000/$5,000", recommendation: "Strongly recommended" },
+        "New Jersey": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
         "New Mexico": { limits: "$25,000/$50,000/$10,000", recommendation: "Strongly recommended" },
         "New York": { limits: "$25,000/$50,000/$10,000", recommendation: "Strongly recommended" },
-        "North Carolina": { limits: "$50,000/$100,000/$50,000", recommendation: "Consider upgrading" },
-        "North Dakota": { limits: "$30,000/$60,000/$30,000", recommendation: "Consider upgrading" },
+        "North Carolina": { limits: "$30,000/$60,000/$25,000", recommendation: "Consider upgrading" },
+        "North Dakota": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
         "Ohio": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
         "Oklahoma": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
         "Oregon": { limits: "$25,000/$50,000/$20,000", recommendation: "Consider upgrading" },
@@ -121,12 +121,12 @@
         "South Dakota": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
         "Tennessee": { limits: "$25,000/$50,000/$15,000", recommendation: "Strongly recommended" },
         "Texas": { limits: "$30,000/$60,000/$25,000", recommendation: "Consider upgrading" },
-        "Utah": { limits: "$30,000/$65,000/$25,000", recommendation: "Consider upgrading" },
+        "Utah": { limits: "$25,000/$65,000/$15,000", recommendation: "Consider upgrading" },
         "Vermont": { limits: "$25,000/$50,000/$10,000", recommendation: "Strongly recommended" },
-        "Virginia": { limits: "$50,000/$100,000/$25,000", recommendation: "Consider upgrading" },
+        "Virginia": { limits: "$30,000/$60,000/$20,000", recommendation: "Consider upgrading" },
         "Washington": { limits: "$25,000/$50,000/$10,000", recommendation: "Strongly recommended" },
         "West Virginia": { limits: "$25,000/$50,000/$25,000", recommendation: "Consider upgrading" },
-        "Wisconsin": { limits: "$25,000/$50,000/$10,000", recommendation: "Strongly recommended" },
+        "Wisconsin": { limits: "$25,000/$50,000/$10,000", recommendation: "Consider upgrading" },
         "Wyoming": { limits: "$25,000/$50,000/$20,000", recommendation: "Consider upgrading" }
     };
 
@@ -160,57 +160,47 @@
         html += '<div style="background: #ffffff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #28a745;">✓ Confirm the rental is for business purposes</div>';
         html += '</div>';
 
-        // Step 2: Liability Coverage with specific limits
+        // Step 2: Liability Coverage - NO SPECIAL CASES, ALL STATES TREATED THE SAME
         html += '<div style="background: #f8f9fa; border: 1px solid #e1e5e9; border-left: 4px solid #0066cc; border-radius: 8px; padding: 20px; margin-bottom: 16px;">';
         html += '<h4 style="margin: 0 0 8px 0; color: #2c3e50;">STEP 2: Liability Coverage Analysis</h4>';
         
-        if (state === "California") {
-            html += '<div style="background: #fff5f5; padding: 15px; border-radius: 6px; margin: 10px 0; border: 2px solid #dc3545;">';
-            html += '<div style="font-size: 16px; font-weight: bold; color: #721c24; margin-bottom: 8px;">🚨 CALIFORNIA SPECIAL CASE</div>';
-            html += '<div style="color: #721c24; margin-bottom: 6px;"><strong>Automatic Coverage: NONE</strong></div>';
-            html += '<div style="color: #721c24; margin-bottom: 6px;">California rental companies do NOT provide automatic liability coverage!</div>';
-            html += '<div style="color: #721c24; font-weight: bold;">REQUIRED: You MUST purchase liability insurance from rental company</div>';
+        html += '<div style="background: #e7f3ff; padding: 15px; border-radius: 6px; margin: 10px 0; border: 2px solid #0066cc;">';
+        html += '<div style="font-size: 16px; font-weight: bold; color: #004085; margin-bottom: 8px;">Automatic Coverage Included</div>';
+        html += '<div style="font-size: 18px; font-weight: bold; color: #004085; margin-bottom: 8px;">' + info.limits + '</div>';
+        html += '<div style="font-style: italic; color: #666; font-size: 14px;">(Bodily injury per person / Bodily injury per accident / Property damage per accident)</div>';
+        html += '</div>';
+
+        // Recommendation based on coverage adequacy - SAME LOGIC FOR ALL STATES
+        if (info.recommendation === "Strongly recommended") {
+            html += '<div style="background: #fff3cd; padding: 15px; border-radius: 6px; margin: 10px 0; border: 2px solid #ffc107;">';
+            html += '<div style="font-size: 16px; font-weight: bold; color: #856404; margin-bottom: 8px;">⚠️ STRONGLY RECOMMENDED: Upgrade Coverage</div>';
+            html += '<div style="color: #856404; margin-bottom: 6px;">State minimums are very low for consulting work</div>';
+            html += '<div style="font-weight: bold; color: #856404;">Suggested: $100,000/$300,000/$100,000</div>';
+            html += '</div>';
+        } else if (info.recommendation === "Consider upgrading") {
+            html += '<div style="background: #e7f3ff; padding: 15px; border-radius: 6px; margin: 10px 0; border: 1px solid #b8daff;">';
+            html += '<div style="font-size: 16px; font-weight: bold; color: #004085; margin-bottom: 8px;">💡 RECOMMENDED: Consider Higher Limits</div>';
+            html += '<div style="color: #004085; margin-bottom: 6px;">Current coverage is adequate but upgrading provides better protection</div>';
+            html += '<div style="font-weight: bold; color: #004085;">Suggested: $100,000/$300,000/$100,000</div>';
             html += '</div>';
         } else {
-            html += '<div style="background: #e7f3ff; padding: 15px; border-radius: 6px; margin: 10px 0; border: 2px solid #0066cc;">';
-            html += '<div style="font-size: 16px; font-weight: bold; color: #004085; margin-bottom: 8px;">Automatic Coverage Included</div>';
-            html += '<div style="font-size: 18px; font-weight: bold; color: #004085; margin-bottom: 8px;">' + info.limits + '</div>';
-            html += '<div style="font-style: italic; color: #666; font-size: 14px;">(Bodily injury per person / Bodily injury per accident / Property damage per accident)</div>';
+            html += '<div style="background: #d4edda; padding: 15px; border-radius: 6px; margin: 10px 0; border: 1px solid #c3e6cb;">';
+            html += '<div style="font-size: 16px; font-weight: bold; color: #155724; margin-bottom: 8px;">✅ GOOD: Coverage is Adequate</div>';
+            html += '<div style="color: #155724; margin-bottom: 6px;">State minimums provide reasonable protection</div>';
+            html += '<div style="color: #155724;">Optional upgrade: $100,000/$300,000/$100,000 for extra peace of mind</div>';
             html += '</div>';
-
-            // Recommendation based on coverage adequacy
-            if (info.recommendation === "Strongly recommended") {
-                html += '<div style="background: #fff3cd; padding: 15px; border-radius: 6px; margin: 10px 0; border: 2px solid #ffc107;">';
-                html += '<div style="font-size: 16px; font-weight: bold; color: #856404; margin-bottom: 8px;">⚠️ STRONGLY RECOMMENDED: Upgrade Coverage</div>';
-                html += '<div style="color: #856404; margin-bottom: 6px;">State minimums are very low for consulting work</div>';
-                html += '<div style="font-weight: bold; color: #856404;">Suggested: $100,000/$300,000/$100,000</div>';
-                html += '</div>';
-            } else if (info.recommendation === "Consider upgrading") {
-                html += '<div style="background: #e7f3ff; padding: 15px; border-radius: 6px; margin: 10px 0; border: 1px solid #b8daff;">';
-                html += '<div style="font-size: 16px; font-weight: bold; color: #004085; margin-bottom: 8px;">💡 RECOMMENDED: Consider Higher Limits</div>';
-                html += '<div style="color: #004085; margin-bottom: 6px;">Current coverage is adequate but upgrading provides better protection</div>';
-                html += '<div style="font-weight: bold; color: #004085;">Suggested: $100,000/$300,000/$100,000</div>';
-                html += '</div>';
-            } else {
-                html += '<div style="background: #d4edda; padding: 15px; border-radius: 6px; margin: 10px 0; border: 1px solid #c3e6cb;">';
-                html += '<div style="font-size: 16px; font-weight: bold; color: #155724; margin-bottom: 8px;">✅ GOOD: Coverage is Adequate</div>';
-                html += '<div style="color: #155724; margin-bottom: 6px;">State minimums provide reasonable protection</div>';
-                html += '<div style="color: #155724;">Optional upgrade: $100,000/$300,000/$100,000 for extra peace of mind</div>';
-                html += '</div>';
-            }
         }
         html += '</div>';
 
-        // Step 3: Action Plan
+        // Step 3: Action Plan - NO SPECIAL CASES
         html += '<div style="background: #f8fff8; border: 1px solid #d4edda; border-left: 4px solid #28a745; border-radius: 8px; padding: 20px; margin-bottom: 16px;">';
         html += '<h4 style="margin: 0 0 8px 0; color: #155724;">STEP 3: At the Rental Counter</h4>';
         html += '<div style="background: #ffffff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #28a745;">✓ Pay with your Chase Business Ink card</div>';
         html += '<div style="background: #ffffff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #28a745;">✓ DECLINE collision damage waiver (CDW/LDW)</div>';
         
-        if (state === "California") {
-            html += '<div style="background: #fff3cd; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #ffc107; color: #856404;">✓ STRONGLY RECOMMENDED: Purchase upgraded liability insurance (very low state minimums)</div>';
-        } else if (info.recommendation === "Strongly recommended") {
-            html += '<div style="background: #fff3cd; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #ffc107; color: #856404;">✓ STRONGLY CONSIDER purchasing upgraded liability insurance</div>';
+        // ALL STATES USE SAME LOGIC BASED ON RECOMMENDATION
+        if (info.recommendation === "Strongly recommended") {
+            html += '<div style="background: #fff3cd; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #ffc107; color: #856404;">✓ STRONGLY RECOMMENDED: Purchase upgraded liability insurance (low state minimums)</div>';
         } else if (info.recommendation === "Consider upgrading") {
             html += '<div style="background: #e7f3ff; padding: 12px; border-radius: 4px; margin: 8px 0; border-left: 3px solid #0066cc; color: #004085;">✓ Consider purchasing upgraded liability insurance for better protection</div>';
         } else {
