@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +6,9 @@
   <title>Rental Car Insurance Checker</title>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans&display=swap" rel="stylesheet">
 </head>
-<body>
-  <!-- Paste the full Rental Car Insurance Checker HTML & JS here -->
-<!-- Rental Car Insurance Checker — Updated 09/04/2025 -->
-<div style="max-width: 100%; font-family: 'Public Sans', sans-serif; line-height:1.5; color:#2F2F2F;">
+<body style="font-family: 'Public Sans', sans-serif; line-height:1.5; color:#2F2F2F; margin:20px;">
+
+  <!-- Header -->
   <div style="background:#EEF1F8; padding:20px; border-radius:8px; margin-bottom:24px; text-align:center;">
     <h2 style="margin:0 0 8px 0; color:#47609F;">🚗 Rental Car Insurance Checker</h2>
     <p style="margin:0; color:#2F2F2F;">Clear steps for your business travel — includes PIP / UM / UIM and No-Fault flags (verified 09/04/2025).</p>
@@ -22,6 +20,7 @@
     <div style="font-size:14px; color:#856404;">⚠️ Consolidates state rules for liability, PIP, UM/UIM. Verify with the state DMV/insurance department before travel.</div>
   </div>
 
+  <!-- Form -->
   <form id="rentalInsuranceForm" style="margin-bottom:24px;">
     <label style="display:block; margin-bottom:8px; font-weight:600; font-size:18px;">Which state will you be renting a car in?</label>
     <select id="travelState" required style="width:100%; padding:12px; border:2px solid #D0D7EB; border-radius:6px; font-size:16px; background:white;">
@@ -45,9 +44,10 @@
     </button>
   </form>
 
+  <!-- Results -->
   <div id="rentalResults" style="display:none;"></div>
 
-  <!-- Glossary -->
+  <!-- Glossary (always visible) -->
   <div id="glossary" style="background:#EEF1F8; border:1px solid #47609F; border-radius:6px; padding:12px; margin-top:24px; font-size:14px;">
     <h4 style="margin:0 0 8px 0; color:#2F2F2F;">Glossary</h4>
     <ul style="padding-left:20px; margin:0;">
@@ -58,43 +58,106 @@
       <li><strong>UIM</strong> — Underinsured Motorist (coverage if the other driver has insufficient insurance)</li>
     </ul>
   </div>
-</div>
 
-<script>
-(function() {
-  // State info + 2025 minimums + PIP/UM/UIM/No-Fault flags + tier
-  const stateInfo = {
-    "Alabama": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:false, uim:false, tier:"consider"},
-    "Alaska": {bi:"$50k/$100k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
-    "Arizona": {bi:"$25k/$50k", pd:"$15k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
-    "Arkansas": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
-    "California": {bi:"$30k/$60k", pd:"$15k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
-    "Colorado": {bi:"$25k/$50k", pd:"$15k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
-    "Connecticut": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
-    "Delaware": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
-    "Florida": {bi:"$10k PIP/$10k PDL", pd:"$0", pip:true, noFault:true, um:false, uim:false, tier:"strong"},
-    "Georgia": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
-    "Hawaii": {bi:"$20k/$40k", pd:"$10k", pip:true, noFault:true, um:true, uim:true, tier:"consider"},
-    "Idaho": {bi:"$25k/$50k", pd:"$15k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
-    "Illinois": {bi:"$25k/$50k", pd:"$20k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
-    "Indiana": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
-    "Iowa": {bi:"$20k/$40k", pd:"$15k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
-    "Kansas": {bi:"$25k/$50k", pd:"$25k", pip:true, noFault:true, um:true, uim:true, tier:"consider"},
-    "Kentucky": {bi:"$25k/$50k", pd:"$25k", pip:true, noFault:true, um:true, uim:true, tier:"consider"},
-    "Louisiana": {bi:"$15k/$30k", pd:"$25k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
-    "Maine": {bi:"$50k/$100k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
-    "Maryland": {bi:"$30k/$60k", pd:"$15k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
-    "Massachusetts": {bi:"$20k/$40k", pd:"$5k", pip:true, noFault:true, um:true, uim:false, tier:"strong"},
-    "Michigan": {bi:"$50k/$100k", pd:"$10k", pip:true, noFault:true, um:true, uim:true, tier:"strong"},
-    "Minnesota": {bi:"$30k/$60k", pd:"$10k", pip:true, noFault:true, um:true, uim:true, tier:"strong"},
-    "Mississippi": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
-    "Missouri": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
-    "Montana": {bi:"$25k/$50k", pd:"$20k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
-    "Nebraska": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
-    "Nevada": {bi:"$25k/$50k", pd:"$20k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
-    "New Hampshire": {bi:"$25k/$50
-::contentReference[oaicite:0]{index=0}
-      </body>
+  <script>
+    (function() {
+      // State info for all 50 states (2025 minimums + flags + tier)
+      const stateInfo = {
+        "Alabama": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:false, uim:false, tier:"consider"},
+        "Alaska": {bi:"$50k/$100k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Arizona": {bi:"$25k/$50k", pd:"$15k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
+        "Arkansas": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
+        "California": {bi:"$30k/$60k", pd:"$15k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
+        "Colorado": {bi:"$25k/$50k", pd:"$15k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Connecticut": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Delaware": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Florida": {bi:"$10k PIP/$10k PDL", pd:"$0", pip:true, noFault:true, um:false, uim:false, tier:"strong"},
+        "Georgia": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
+        "Hawaii": {bi:"$20k/$40k", pd:"$10k", pip:true, noFault:true, um:true, uim:true, tier:"consider"},
+        "Idaho": {bi:"$25k/$50k", pd:"$15k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
+        "Illinois": {bi:"$25k/$50k", pd:"$20k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Indiana": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Iowa": {bi:"$20k/$40k", pd:"$15k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Kansas": {bi:"$25k/$50k", pd:"$25k", pip:true, noFault:true, um:true, uim:true, tier:"consider"},
+        "Kentucky": {bi:"$25k/$50k", pd:"$25k", pip:true, noFault:true, um:true, uim:true, tier:"consider"},
+        "Louisiana": {bi:"$15k/$30k", pd:"$25k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
+        "Maine": {bi:"$50k/$100k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Maryland": {bi:"$30k/$60k", pd:"$15k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Massachusetts": {bi:"$20k/$40k", pd:"$5k", pip:true, noFault:true, um:true, uim:false, tier:"strong"},
+        "Michigan": {bi:"$50k/$100k", pd:"$10k", pip:true, noFault:true, um:true, uim:true, tier:"strong"},
+        "Minnesota": {bi:"$30k/$60k", pd:"$10k", pip:true, noFault:true, um:true, uim:true, tier:"strong"},
+        "Mississippi": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
+        "Missouri": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Montana": {bi:"$25k/$50k", pd:"$20k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
+        "Nebraska": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Nevada": {bi:"$25k/$50k", pd:"$20k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
+        "New Hampshire": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "New Jersey": {bi:"$15k/$30k", pd:"$5k", pip:true, noFault:true, um:true, uim:true, tier:"strong"},
+        "New Mexico": {bi:"$25k/$50k", pd:"$10k", pip:true, noFault:true, um:true, uim:true, tier:"consider"},
+        "New York": {bi:"$25k/$50k", pd:"$10k", pip:true, noFault:true, um:true, uim:true, tier:"strong"},
+        "North Carolina": {bi:"$30k/$60k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "North Dakota": {bi:"$25k/$50k", pd:"$25k", pip:true, noFault:true, um:true, uim:true, tier:"consider"},
+        "Ohio": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Oklahoma": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Oregon": {bi:"$25k/$50k", pd:"$15k", pip:true, noFault:true, um:true, uim:true, tier:"strong"},
+        "Pennsylvania": {bi:"$15k/$30k", pd:"$5k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Rhode Island": {bi:"$25k/$50k", pd:"$25k", pip:true, noFault:true, um:true, uim:true, tier:"strong"},
+        "South Carolina": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
+        "South Dakota": {bi:"$25k/$50k", pd:"$25k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Tennessee": {bi:"$25k/$50k", pd:"$10k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Texas": {bi:"$30k/$60k", pd:"$25k", pip:false, noFault:false, um:false, uim:false, tier:"strong"},
+        "Utah": {bi:"$25k/$65k", pd:"$15k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Vermont": {bi:"$25k/$50k", pd:"$10k", pip:true, noFault:true, um:true, uim:true, tier:"strong"},
+        "Virginia": {bi:"$25k/$50k", pd:"$20k", pip:false, noFault:false, um:true, uim:true, tier:"consider"},
+        "Washington": {bi:"$25k/$50k", pd:"$10k", pip:true, noFault:true, um:true, uim:true, tier:"strong"},
+        "West Virginia": {bi:"$25k/$50k", pd:"$25k", pip:true, noFault:true, um:true, uim:true, tier:"consider"},
+        "Wisconsin": {bi:"$25k/$50k", pd:"$10k", pip:true, noFault:true, um:true, uim:true, tier:"strong"},
+        "Wyoming": {bi:"$25k/$50k", pd:"$20k", pip:false, noFault:false, um:false, uim:false, tier:"strong"}
+      };
+
+      const highUninsuredStates = ["Florida","Texas","Nevada","Georgia","Mississippi"];
+
+      function generatePlan(state) {
+        const info = stateInfo[state];
+        const resultsDiv = document.getElementById('rentalResults');
+
+        let counterBullets = `
+        <div style="background:#EEF1F8; border:1px solid #47609F; border-left:4px solid #4FAD78; border-radius:8px; padding:20px; margin-bottom:16px;">
+          <h4 style="margin:0 0 8px 0; color:#2F2F2F;">STEP 3: At the Rental Counter</h4>
+          <ul style="padding-left:20px; color:#2F2F2F;">
+            <li>Pay with your Chase Ink Business card</li>
+            <li>Decline CDW/LDW (your card covers collision/theft)</li>
+            <li>PIP: ✅ Covered by health insurance — optional from rental</li>`;
+
+        if(info.tier==="strong") counterBullets += `<li>⚠️ Strongly consider supplemental liability / higher limits ($100k/$300k/$100k)</li>`;
+        else if(info.tier==="consider") counterBullets += `<li>💡 Consider supplemental liability / higher limits ($100k/$300k/$100k)</li>`;
+
+        if(!info.um && !info.uim && highUninsuredStates.includes(state))
+          counterBullets += `<li>⚠️ Optional: consider UM/UIM coverage ($100k/$300k) due to high % of uninsured drivers</li>`;
+
+        counterBullets += `
+            <li>Take photos of the car before driving</li>
+            <li>Keep all receipts and rental agreements</li>
+          </ul>
+        </div>`;
+
+        resultsDiv.innerHTML = `
+          <div style="background:#4FAD78; color:white; padding:20px; border-radius:8px; text-align:center; margin-bottom:20px;">
+            <h3 style="margin:0;">Your insurance plan for ${state}</h3>
+          </div>
+          ${counterBullets}
+        `;
+        resultsDiv.style.display = "block";
+      }
+
+      document.getElementById('rentalInsuranceForm').addEventListener('submit', function(e){
+        e.preventDefault();
+        const state = document.getElementById('travelState').value;
+        if(!state) { alert("Please select a destination state."); return; }
+        generatePlan(state);
+      });
+    })();
+  </script>
+
+</body>
 </html>
-
- 
