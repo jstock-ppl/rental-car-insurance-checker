@@ -93,15 +93,15 @@
                <h4>2️⃣ State Minimum Liability & Extras</h4>
                ${formatLimits(info)}
                ${tierBlock(info.tier)}
-               <div style="background:#5978c7;color:white;padding:12px;border-radius:6px;margin-top:12px;">
-                 <strong>State Guidance: what to do</strong>
-                 <ul style="margin-top:6px; padding-left:20px;">
-                   <li>PIP: ${info.pipRequired ? "Required — confirm with rental agent" : "Optional — consider $10,000 coverage"}</li>
-                   <li>No-Fault: ${info.noFaultState ? "Yes — PIP may apply" : "No — at-fault state; your liability applies if you cause accident"}</li>
-                   <li>UM: ${info.umRequired ? "Required — check your policy limits" : "Optional — consider $100k/$300k"}</li>
-                   <li>UIM: ${info.uimRequired ? "Required — check your policy limits" : "Optional — same as UM limits"}</li>
-                 </ul>
-               </div>
+<div style="background:#5978c7;color:white;padding:12px;border-radius:6px;margin-top:12px;">
+  <strong>State Guidance: what to do</strong>
+  <ul style="margin-top:6px; padding-left:20px;">
+    <li>PIP: ✅ Covered by your health insurance — optional from rental</li>
+    <li>No-Fault: ${info.noFaultState ? "Yes — PIP may apply to others" : "No — at-fault state; your liability applies if you cause accident"}</li>
+    <li>UM: ${info.umRequired ? "Required — check your policy limits" : "Optional — consider $100k/$300k"}</li>
+    <li>UIM: ${info.uimRequired ? "Required — check your policy limits" : "Optional — same as UM limits"}</li>
+  </ul>
+</div>
              </div>`;
 
     html += `<div style="background:#4FAD78;color:white;padding:12px;border-radius:6px;">
