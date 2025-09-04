@@ -1,109 +1,125 @@
-<!-- Rental Car Insurance Checker — Brand & 2025 Update -->
-<div style="max-width: 100%; font-family: 'Public Sans', sans-serif; line-height: 1.5; color: #2F2F2F;">
-  <div style="background: #EEF1F8; padding: 24px; border-radius: 12px; text-align: center;">
-    <h2 style="margin: 0 0 12px 0; font-family: 'Sharp Grotesk', sans-serif; color: #5978c7;">🚗 Rental Car Insurance Checker</h2>
-    <p style="margin: 0; color: #47609F; font-size: 16px;">Understand your coverage for business travel — includes <span title="Personal Injury Protection">PIP</span>, <span title="Uninsured Motorist">UM</span>, <span title="Underinsured Motorist">UIM</span>, and state liability limits.</p>
+<!-- Rental Car Insurance Checker — Plain-Language, Branded, 2025 -->
+<div style="max-width:100%; font-family:'Public Sans',system-ui,sans-serif; line-height:1.5; color:#2F2F2F;">
+  <div style="background:#EEF1F8; padding:20px; border-radius:8px; margin-bottom:24px; text-align:center;">
+    <h2 style="margin:0 0 8px 0; color:#47609F;">🚗 Rental Car Insurance Checker</h2>
+    <p style="margin:0; color:#2F2F2F;">Clear, step-by-step guidance for your business travel — including numbers for PIP, UM/UIM, and SLI (verified 09/04/2025).</p>
   </div>
 
   <!-- Last Updated Notice -->
-  <div style="background: #FFF4E0; border: 1px solid #DE8761; border-radius: 8px; padding: 16px; margin: 24px 0;">
-    <div style="font-size: 14px; font-weight: 600; color: #2F2F2F;">Last Updated: 09/04/2025</div>
-    <div style="font-size: 14px; color: #2F2F2F;">⚠️ This tool consolidates state minimums for liability, PIP, UM/UIM, and No-Fault flags. Always verify with your state’s DMV or insurance department before travel.</div>
+  <div style="background:#DE8761; color:white; border-radius:8px; padding:16px; margin-bottom:24px;">
+    <div style="font-size:14px;"><strong>Last Updated: 09/04/2025</strong></div>
+    <div style="font-size:14px;">Always confirm coverage details with your card, health insurance, and state DMV/insurance site before travel.</div>
   </div>
 
-  <form id="rentalInsuranceForm" style="margin-bottom: 24px;">
-    <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 18px; color: #2F2F2F;">
-      Which state will you be renting a car in?
-    </label>
-    <select id="travelState" required style="width: 100%; padding: 12px; border: 2px solid #D0D7EB; border-radius: 8px; font-size: 16px; background: white; margin-bottom: 16px;">
+  <form id="rentalInsuranceForm" style="margin-bottom:24px;">
+    <label style="display:block; margin-bottom:8px; font-weight:600; font-size:18px; color:#47609F;">Which state will you be renting a car in?</label>
+    <select id="travelState" required style="width:100%; padding:12px; border:2px solid #D0D7EB; border-radius:6px; font-size:16px; background:white;">
       <option value="">Select your destination state...</option>
-      <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
-      <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
-      <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
-      <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
-      <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
-      <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
-      <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
-      <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
-      <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
-      <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
-      <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
-      <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
-      <option>Wisconsin</option><option>Wyoming</option>
+      <option>Alabama</option><option>Alaska</option><option>California</option><option>Florida</option>
     </select>
-
-    <button type="submit" style="width: 100%; background: #4FAD78; color: white; border: none; padding: 16px; border-radius: 8px; font-size: 18px; font-weight: 600; cursor: pointer;">
+    <button type="submit" style="width:100%; background:#4FAD78; color:white; border:none; padding:15px; border-radius:6px; font-size:18px; font-weight:600; cursor:pointer; margin-top:12px;">
       Get My Plan
     </button>
   </form>
 
-  <div id="rentalResults" style="display: none;"></div>
+  <div id="rentalResults" style="display:none;"></div>
 
-  <!-- Acronym Glossary -->
-  <div id="acronymGlossary" style="display:none; background:#EEF1F8; border:1px solid #D0D7EB; border-radius:8px; padding:16px; margin-top:24px;">
-    <h3 style="font-family:'Sharp Grotesk',sans-serif; color:#5978c7;">📝 Acronym Glossary</h3>
-    <ul style="font-family:'Public Sans',sans-serif; color:#2F2F2F; font-size:14px; line-height:1.5; margin-top:8px;">
-      <li><strong>BI</strong>: Bodily Injury — coverage for injuries to other people.</li>
-      <li><strong>PD</strong>: Property Damage — coverage for damage to others’ property.</li>
-      <li><strong>PIP</strong>: Personal Injury Protection — medical coverage for you and passengers regardless of fault.</li>
-      <li><strong>UM</strong>: Uninsured Motorist — protection if hit by someone without insurance.</li>
-      <li><strong>UIM</strong>: Underinsured Motorist — protection if hit by someone with insufficient coverage.</li>
-    </ul>
+  <!-- Glossary -->
+  <div id="glossary" style="font-size:12px; color:#2F2F2F; margin-top:16px; border:1px solid #D0D7EB; border-radius:6px; padding:12px; background:#EEF1F8;">
+    <strong>Glossary:</strong> BI = Bodily Injury, PD = Property Damage, PIP = Personal Injury Protection, UM/UIM = Un/Underinsured Motorist, SLI = Supplemental Liability Insurance
   </div>
 </div>
 
 <script>
-(function(){
+(function() {
   const stateInfo = {
-    "Alabama": {biPerPerson:"$25,000",biPerAccident:"$50,000",pd:"$25,000",pip:false,noFault:false,um:false,uim:false,tier:"consider"},
-    "Alaska": {biPerPerson:"$50,000",biPerAccident:"$100,000",pd:"$25,000",pip:false,noFault:false,um:true,uim:true,tier:"consider"},
-    "California": {biPerPerson:"$30,000",biPerAccident:"$60,000",pd:"$15,000",pip:false,noFault:false,um:false,uim:false,tier:"strong"},
-    "Florida": {biPerPerson:null,biPerAccident:null,pd:null,pip:true,noFault:true,um:false,uim:false,tier:"strong",note:"$10,000 PIP / $10,000 PDL; consider supplemental liability (SLI)"},
-    // ...include all other states similarly
+    "Alabama": {
+      biPerPerson:"$25,000", biPerAccident:"$50,000", pd:"$25,000",
+      pip:"Optional: buy $10,000 per person if your health plan doesn’t cover medical",
+      noFault:"You pay only if you cause the accident",
+      umUim:"Optional: consider $50,000/$100,000 if other driver lacks coverage",
+      sli:"Consider $100,000/$300,000/$100,000 for business travel",
+      tier:"Consider"
+    },
+    "Alaska": {
+      biPerPerson:"$50,000", biPerAccident:"$100,000", pd:"$25,000",
+      pip:"Optional: buy $10,000 per person if your health plan doesn’t cover medical",
+      noFault:"You pay only if you cause the accident",
+      umUim:"Recommended: $50,000/$100,000",
+      sli:"Consider $100,000/$300,000/$100,000",
+      tier:"Consider"
+    },
+    "California": {
+      biPerPerson:"$30,000", biPerAccident:"$60,000", pd:"$15,000",
+      pip:"Optional: buy $10,000 per person if your health plan doesn’t cover medical",
+      noFault:"You pay only if you cause the accident",
+      umUim:"Recommended: $100,000/$300,000",
+      sli:"Strongly recommended: $100,000/$300,000/$100,000",
+      tier:"Strong"
+    },
+    "Florida": {
+      biPerPerson:"State requires $10,000 PIP", biPerAccident:"State requires $10,000 PDL", pd:"N/A",
+      pip:"Required: $10,000 per person",
+      noFault:"No-Fault state",
+      umUim:"Optional: $100,000/$300,000 if other driver lacks coverage",
+      sli:"Strongly recommended: $100,000/$300,000/$100,000",
+      tier:"Strong"
+    }
   };
 
-  function tierBlock(tier){
-    if(tier==="strong"){return `<div style="background:#DE8761; padding:12px; border-radius:6px; color:white; font-family:'Value Serif',serif; margin:12px 0;">⚠️ STRONGLY RECOMMENDED: Upgrade Coverage</div>`;}
-    if(tier==="consider"){return `<div style="background:#D0D7EB; padding:12px; border-radius:6px; color:#47609F; font-family:'Value Serif',serif; margin:12px 0;">💡 Consider upgrading limits</div>`;}
-    return `<div style="background:#4FAD78; padding:12px; border-radius:6px; color:white; font-family:'Value Serif',serif; margin:12px 0;">✅ Adequate coverage</div>`;
-  }
+  const tierColors = {
+    "Strong": "#DE8761",
+    "Consider": "#5978c7",
+    "Adequate": "#4FAD78"
+  };
 
-  function formatLimits(info){
-    if(info.biPerPerson){return `<div style="font-weight:bold; font-size:16px;">BI: ${info.biPerPerson}/${info.biPerAccident}, PD: ${info.pd}</div>`;}
-    return `<div style="font-style:italic; font-size:14px;">${info.note}</div>`;
-  }
-
-  document.getElementById('rentalInsuranceForm').addEventListener('submit',function(e){
+  document.getElementById('rentalInsuranceForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const state=document.getElementById('travelState').value;
-    if(!state){alert('Select a state'); return;}
+    const state = document.getElementById('travelState').value;
+    if(!state) { alert('Please select a destination state.'); return; }
     generatePlan(state);
   });
 
-  function generatePlan(state){
-    const info=stateInfo[state];
-    const resultsDiv=document.getElementById('rentalResults');
-    const html=`
-      <div style="background:#EEF1F8; padding:16px; border-radius:12px; margin-bottom:16px;">
-        <h3 style="font-family:'Sharp Grotesk',sans-serif; color:#5978c7;">1️⃣ Your Chase Business Ink Card</h3>
-        <p style="font-family:'Public Sans',sans-serif; color:#2F2F2F;">Primary CDW/LDW coverage for business rentals, typically up to $60,000. Pay for entire rental with card and decline rental company coverage.</p>
-      </div>
-      <div style="background:#EEF1F8; padding:16px; border-radius:12px; margin-bottom:16px;">
-        <h3 style="font-family:'Sharp Grotesk',sans-serif; color:#5978c7;">2️⃣ Your Health Insurance</h3>
-        <p style="font-family:'Public Sans',sans-serif; color:#2F2F2F;">Covers medical costs if you or your passengers are injured. Check plan triggers for rental-related accidents.</p>
-      </div>
-      <div style="background:#EEF1F8; padding:16px; border-radius:12px; margin-bottom:16px;">
-        <h3 style="font-family:'Sharp Grotesk',sans-serif; color:#5978c7;">3️⃣ State Minimum Liability & Flags</h3>
-        ${formatLimits(info)}
-        ${tierBlock(info.tier)}
-        <p style="font-family:'Public Sans',sans-serif; font-size:14px; color:#2F2F2F;">
-          <strong>Flags:</strong> PIP ${info.pip?"✓":"optional"} | No-Fault ${info.noFault?"✓":"at-fault"} | UM ${info.um?"✓":"optional"} | UIM ${info.uim?"✓":"optional"}
-        </p>
-      </div>
-    `;
-    resultsDiv.innerHTML=html;
-    resultsDiv.style.display='block';
-    document.getElementById('acronymGlossary').style.display='block';
+  function generatePlan(state) {
+    const info = stateInfo[state];
+    const resultsDiv = document.getElementById('rentalResults');
+    let html = `<div style="background:${tierColors[info.tier]}; color:white; padding:20px; border-radius:8px; text-align:center; margin-bottom:16px;">
+                  <h3 style="margin:0;">Your insurance plan for ${state}</h3>
+                </div>`;
+
+    // Section 1: Chase Card
+    html += `<div style="background:#EEF1F8; border-left:4px solid #4FAD78; padding:16px; border-radius:6px; margin-bottom:16px;">
+               <h4 style="margin:0 0 8px 0; color:#47609F;">1️⃣ Chase Business Ink Card (Car Coverage)</h4>
+               <ul>
+                 <li>✅ Pay for the full rental with your Chase Ink Business card</li>
+                 <li>✅ Decline the rental company’s CDW/LDW</li>
+                 <li>✅ Covers collision/theft up to ~$60,000</li>
+               </ul>
+             </div>`;
+
+    // Section 2: Health Insurance
+    html += `<div style="background:#EEF1F8; border-left:4px solid #5978c7; padding:16px; border-radius:6px; margin-bottom:16px;">
+               <h4 style="margin:0 0 8px 0; color:#47609F;">2️⃣ Health Insurance (Medical)</h4>
+               <ul>
+                 <li>✅ Check if your health plan covers medical costs for you or passengers</li>
+                 <li>⚠️ ${info.pip}</li>
+               </ul>
+             </div>`;
+
+    // Section 3: State Liability & Additional Coverage
+    html += `<div style="background:#EEF1F8; border-left:4px solid #DE8761; padding:16px; border-radius:6px; margin-bottom:16px;">
+               <h4 style="margin:0 0 8px 0; color:#47609F;">3️⃣ State Minimum Liability & Extras</h4>
+               <ul>
+                 <li>✅ State minimum liability: BI ${info.biPerPerson}/${info.biPerAccident}, PD ${info.pd}</li>
+                 <li>⚠️ ${info.sli}</li>
+                 <li>⚠️ ${info.umUim}</li>
+                 <li>✅ At counter: pay with card, decline CDW/LDW, confirm PIP if required, take photos, keep receipts</li>
+               </ul>
+               <div style="font-size:12px; color:#2F2F2F; margin-top:8px;">${info.noFault}</div>
+             </div>`;
+
+    resultsDiv.innerHTML = html;
+    resultsDiv.style.display = 'block';
   }
 })();
 </script>
