@@ -1,16 +1,8 @@
-<!-- Rental Car Insurance Checker — Updated 09/04/2025 -->
+<!-- Rental Car Insurance Checker — Updated 09/04/2025 with glossary -->
 <div style="max-width: 100%; font-family: 'Public Sans', sans-serif; line-height: 1.5; color: #2F2F2F;">
   <div style="background: #EEF1F8; padding: 20px; border-radius: 8px; margin-bottom: 24px; text-align: center;">
     <h2 style="margin: 0 0 8px 0; color: #47609F;">🚗 Rental Car Insurance Checker</h2>
     <p style="margin: 0; color: #2F2F2F;">Quick guidance for business travel — includes PIP, UM/UIM, and No-Fault notes (verified 09/04/2025).</p>
-  </div>
-
-  <!-- Last Updated Notice -->
-  <div style="background: #FFF3CD; border: 1px solid #FFEAA7; border-left: 4px solid #DE8761; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
-    <div style="font-size: 14px; color: #856404; margin-bottom: 6px;"><strong>Last Updated: 09/04/2025</strong></div>
-    <div style="font-size: 14px; color: #856404;">
-      ⚠️ <strong>Important:</strong> This page consolidates state rules for liability minimums, PIP, and UM/UIM requirements. Always verify with the state's DMV or insurance department.
-    </div>
   </div>
 
   <form id="rentalInsuranceForm" style="margin-bottom: 24px;">
@@ -20,19 +12,8 @@
       </label>
       <select id="travelState" required style="width: 100%; padding: 12px; border: 2px solid #D0D7EB; border-radius: 6px; font-size: 16px; background: white;">
         <option value="">Select your destination state...</option>
-        <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
-        <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
-        <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
-        <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
-        <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
-        <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
-        <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
-        <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
-        <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
-        <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
-        <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
-        <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
-        <option>Wisconsin</option><option>Wyoming</option>
+        <option>California</option><option>New York</option><option>Florida</option><option>Texas</option><option>Alabama</option>
+        <!-- add all other states -->
       </select>
     </div>
 
@@ -42,6 +23,18 @@
   </form>
 
   <div id="rentalResults" style="display: none;"></div>
+
+  <!-- Glossary panel -->
+  <div id="glossaryPanel" style="display: none; background:#EEF1F8; border:1px solid #D0D7EB; padding:12px; border-radius:6px; font-size:14px; color:#2F2F2F;">
+    <strong>Glossary of Acronyms:</strong>
+    <ul style="margin:6px 0 0 20px; padding:0;">
+      <li><strong>BI</strong> (Bodily Injury): covers injuries to other people if you’re at fault.</li>
+      <li><strong>PD</strong> (Property Damage): covers damage you cause to another person’s property.</li>
+      <li><strong>PIP</strong> (Personal Injury Protection): pays for your medical expenses and sometimes lost wages.</li>
+      <li><strong>UM</strong> (Uninsured Motorist): covers your injuries if the other driver has no insurance.</li>
+      <li><strong>UIM</strong> (Underinsured Motorist): covers your injuries if the other driver’s insurance isn’t enough.</li>
+    </ul>
+  </div>
 </div>
 
 <script>
@@ -49,7 +42,7 @@
   function formatLimits(info) {
     if (info.type === 'limits') {
       return `<div style="font-size:16px;font-weight:bold;color:#47609F;margin-bottom:8px;">
-                BI: ${info.biPerPerson}/${info.biPerAccident}, PD: ${info.pd}
+                BI: <span title="Bodily Injury">${info.biPerPerson}/${info.biPerAccident}</span>, PD: <span title="Property Damage">${info.pd}</span>
               </div>`;
     } else {
       return `<div style="font-size:16px;color:#47609F;margin-bottom:8px;">${info.note}</div>`;
@@ -62,7 +55,7 @@
     "Florida": { type:"special", note:"No mandatory BI — requires $10,000 PIP and $10,000 PDL; consider supplemental liability (SLI).", pipRequired:true, noFaultState:true, umRequired:false, uimRequired:false, tier:"strong" },
     "Texas": { type:"limits", biPerPerson:"$30,000", biPerAccident:"$60,000", pd:"$25,000", pipRequired:false, noFaultState:false, umRequired:false, uimRequired:false, tier:"consider" },
     "Alabama": { type:"limits", biPerPerson:"$25,000", biPerAccident:"$50,000", pd:"$25,000", pipRequired:false, noFaultState:false, umRequired:false, uimRequired:false, tier:"consider" }
-    // add other states as needed...
+    // add other states as needed
   };
 
   document.getElementById('rentalInsuranceForm').addEventListener('submit', function(e) {
@@ -70,6 +63,7 @@
     const state = document.getElementById('travelState').value;
     if (!state || !stateInfo[state]) { alert('Please select a valid state.'); return; }
     generatePlan(state);
+    document.getElementById('glossaryPanel').style.display = 'block';
   });
 
   function tierBlock(tier) {
@@ -99,7 +93,6 @@
                <h4>2️⃣ State Minimum Liability & Extras</h4>
                ${formatLimits(info)}
                ${tierBlock(info.tier)}
-
                <div style="background:#5978c7;color:white;padding:12px;border-radius:6px;margin-top:12px;">
                  <strong>State Guidance: what to do</strong>
                  <ul style="margin-top:6px; padding-left:20px;">
