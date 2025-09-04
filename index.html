@@ -1,130 +1,47 @@
-<!-- Rental Car Insurance Checker — Plain-Language, 2025 -->
-<div style="max-width:100%; font-family:'Public Sans',system-ui,sans-serif; line-height:1.5; color:#2F2F2F;">
-  <div style="background:#EEF1F8; padding:20px; border-radius:8px; margin-bottom:24px; text-align:center;">
-    <h2 style="margin:0 0 8px 0; color:#47609F;">🚗 Rental Car Insurance Checker</h2>
-    <p style="margin:0; color:#2F2F2F;">Clear, step-by-step guidance for your business travel — includes numbers for PIP, UM/UIM, and SLI (verified 09/04/2025).</p>
+<!-- Section 3: State Liability & Recommended Coverage -->
+<div style="background:#EEF1F8; border-radius:8px; padding:16px; margin-bottom:16px;">
+
+  <h4 style="margin:0 0 12px 0; color:#47609F;">3️⃣ State Minimum Liability & Extras</h4>
+
+  <!-- Legal Minimums -->
+  <div style="background:#D0D7EB; border-left:4px solid #47609F; padding:12px; border-radius:6px; margin-bottom:12px;">
+    <strong>✅ State Minimum Liability</strong>
+    <div style="margin-top:6px;">
+      Bodily Injury (BI): $30,000 per person / $60,000 per accident<br>
+      Property Damage (PD): $15,000 per accident
+    </div>
+    <div style="font-size:12px; color:#2F2F2F; margin-top:4px;">These are the legal minimums required in this state.</div>
   </div>
 
-  <!-- Last Updated Notice -->
-  <div style="background:#DE8761; color:white; border-radius:8px; padding:16px; margin-bottom:24px;">
-    <div style="font-size:14px;"><strong>Last Updated: 09/04/2025</strong></div>
-    <div style="font-size:14px;">Always confirm coverage details with your card, health insurance, and state DMV/insurance site before travel.</div>
+  <!-- Supplemental Liability Insurance -->
+  <div style="background:#DE8761; color:white; border-left:4px solid #B45F3E; padding:12px; border-radius:6px; margin-bottom:12px;">
+    <strong>⚠️ Strongly Recommended: Supplemental Liability (SLI)</strong>
+    <div style="margin-top:6px;">
+      $100,000 per person / $300,000 per accident / $100,000 property damage
+    </div>
+    <div style="font-size:12px;">Extra protection beyond state minimums, especially for business travel.</div>
   </div>
 
-  <form id="rentalInsuranceForm" style="margin-bottom:24px;">
-    <label style="display:block; margin-bottom:8px; font-weight:600; font-size:18px; color:#47609F;">Which state will you be renting a car in?</label>
-    <select id="travelState" required style="width:100%; padding:12px; border:2px solid #D0D7EB; border-radius:6px; font-size:16px; background:white;">
-      <option value="">Select your destination state...</option>
-      <option>Alabama</option>
-      <option>Alaska</option>
-      <option>California</option>
-      <option>Florida</option>
-      <option>New York</option>
-      <!-- add all states here -->
-    </select>
-    <button type="submit" style="width:100%; background:#4FAD78; color:white; border:none; padding:15px; border-radius:6px; font-size:18px; font-weight:600; cursor:pointer; margin-top:12px;">
-      Get My Plan
-    </button>
-  </form>
-
-  <div id="rentalResults" style="display:none;"></div>
-
-  <!-- Glossary -->
-  <div id="glossary" style="font-size:12px; color:#2F2F2F; margin-top:16px; border:1px solid #D0D7EB; border-radius:6px; padding:12px; background:#EEF1F8;">
-    <strong>Glossary:</strong> BI = Bodily Injury, PD = Property Damage, PIP = Personal Injury Protection, UM/UIM = Un/Underinsured Motorist, SLI = Supplemental Liability Insurance
+  <!-- Un/Underinsured Motorist -->
+  <div style="background:#5978c7; color:white; border-left:4px solid #47609F; padding:12px; border-radius:6px; margin-bottom:12px;">
+    <strong>⚠️ Recommended: UM/UIM Coverage</strong>
+    <div style="margin-top:6px;">
+      $100,000 per person / $300,000 per accident
+    </div>
+    <div style="font-size:12px;">Covers you if the other driver doesn’t have enough insurance.</div>
   </div>
+
+  <!-- At-the-Counter Actions -->
+  <div style="background:#4FAD78; color:white; border-left:4px solid #3E9462; padding:12px; border-radius:6px;">
+    <strong>✅ At the Rental Counter</strong>
+    <ul style="margin:6px 0 0 20px; padding:0;">
+      <li>Pay with your Chase Ink Business card</li>
+      <li>Decline the rental company’s CDW/LDW</li>
+      <li>Confirm PIP if required by the state</li>
+      <li>Take photos of the car before driving</li>
+      <li>Keep all receipts and rental agreements</li>
+    </ul>
+  </div>
+
 </div>
 
-<script>
-(function() {
-  const stateInfo = {
-    "Alabama": {
-      biPerPerson:"$25,000", biPerAccident:"$50,000", pd:"$25,000",
-      pip:"Optional: your Anthem health plan usually covers medical costs first",
-      noFault:"At-fault state: you pay only if you cause the accident",
-      umUim:"Optional: consider $50,000/$100,000 if the other driver lacks coverage",
-      sli:"Consider $100,000/$300,000/$100,000 for business travel",
-      tier:"Consider"
-    },
-    "California": {
-      biPerPerson:"$30,000", biPerAccident:"$60,000", pd:"$15,000",
-      pip:"Optional: your Anthem health plan usually covers medical costs first",
-      noFault:"At-fault state",
-      umUim:"Recommended: $100,000/$300,000 if other driver lacks coverage",
-      sli:"Strongly recommended: $100,000/$300,000/$100,000",
-      tier:"Strong"
-    },
-    "Florida": {
-      biPerPerson:"$10,000 PIP", biPerAccident:"$10,000 PDL", pd:"N/A",
-      pip:"Required: $10,000 per person, but your Anthem health plan may cover additional medical costs",
-      noFault:"No-Fault state",
-      umUim:"Optional: $100,000/$300,000 if other driver lacks coverage",
-      sli:"Strongly recommended: $100,000/$300,000/$100,000",
-      tier:"Strong"
-    },
-    "New York": {
-      biPerPerson:"$25,000", biPerAccident:"$50,000", pd:"$10,000",
-      pip:"Required: $50,000 per person / $100,000 per accident, but Anthem Empire covers medical costs beyond PIP",
-      noFault:"No-Fault state: medical is covered even if you caused the accident",
-      umUim:"Recommended: $100,000/$300,000 if other driver lacks coverage",
-      sli:"Consider $100,000/$300,000/$100,000 for business travel",
-      tier:"Strong"
-    }
-  };
-
-  const tierColors = {
-    "Strong": "#DE8761",
-    "Consider": "#5978c7",
-    "Adequate": "#4FAD78"
-  };
-
-  document.getElementById('rentalInsuranceForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const state = document.getElementById('travelState').value;
-    if(!state) { alert('Please select a destination state.'); return; }
-    generatePlan(state);
-  });
-
-  function generatePlan(state) {
-    const info = stateInfo[state];
-    const resultsDiv = document.getElementById('rentalResults');
-    let html = `<div style="background:${tierColors[info.tier]}; color:white; padding:20px; border-radius:8px; text-align:center; margin-bottom:16px;">
-                  <h3 style="margin:0;">Your insurance plan for ${state}</h3>
-                </div>`;
-
-    // Section 1: Chase Card
-    html += `<div style="background:#EEF1F8; border-left:4px solid #4FAD78; padding:16px; border-radius:6px; margin-bottom:16px;">
-               <h4 style="margin:0 0 8px 0; color:#47609F;">1️⃣ Chase Business Ink Card (Car Coverage)</h4>
-               <ul>
-                 <li>✅ Pay for the full rental with your Chase Ink Business card</li>
-                 <li>✅ Decline the rental company’s CDW/LDW</li>
-                 <li>✅ Covers collision/theft up to ~$60,000</li>
-               </ul>
-             </div>`;
-
-    // Section 2: Health Insurance
-    html += `<div style="background:#EEF1F8; border-left:4px solid #5978c7; padding:16px; border-radius:6px; margin-bottom:16px;">
-               <h4 style="margin:0 0 8px 0; color:#47609F;">2️⃣ Health Insurance (Medical)</h4>
-               <ul>
-                 <li>✅ Your Anthem health plan usually covers medical costs for you and passengers</li>
-                 <li>⚠️ ${info.pip}</li>
-               </ul>
-             </div>`;
-
-    // Section 3: State Liability & Additional Coverage
-    html += `<div style="background:#EEF1F8; border-left:4px solid #DE8761; padding:16px; border-radius:6px; margin-bottom:16px;">
-               <h4 style="margin:0 0 8px 0; color:#47609F;">3️⃣ State Minimum Liability & Extras</h4>
-               <ul>
-                 <li>✅ State minimum liability: BI ${info.biPerPerson}/${info.biPerAccident}, PD ${info.pd}</li>
-                 <li>⚠️ ${info.sli}</li>
-                 <li>⚠️ ${info.umUim}</li>
-                 <li>✅ At counter: pay with card, decline CDW/LDW, confirm PIP if required, take photos, keep receipts</li>
-               </ul>
-               <div style="font-size:12px; color:#2F2F2F; margin-top:8px;">${info.noFault}</div>
-             </div>`;
-
-    resultsDiv.innerHTML = html;
-    resultsDiv.style.display = 'block';
-  }
-})();
-</script>
